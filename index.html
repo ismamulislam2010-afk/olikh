@@ -1,0 +1,191 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#f7f5ef">
+<title>OLIKH — Every Page, A New World.</title>
+<style>
+:root{--bg:#f7f5ef;--paper:#fffdf8;--text:#24251f;--muted:#77786f;--line:#e5e1d7;--accent:#52634b}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Georgia,"Times New Roman",serif;transition:.25s}
+button,input{font:inherit}
+button{cursor:pointer}
+header{padding:20px 6%;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line)}
+.logo{font-size:28px;font-weight:bold;letter-spacing:4px}
+.logo small{display:block;font:10px Arial,sans-serif;letter-spacing:1px;margin-top:5px;color:var(--muted)}
+nav{display:flex;gap:18px;align-items:center}
+nav a{color:var(--text);text-decoration:none;font:13px Arial,sans-serif}
+.menu{display:none}
+.hero{padding:70px 7% 55px;display:grid;grid-template-columns:1.3fr .7fr;gap:35px;align-items:center}
+.eyebrow{font:11px Arial,sans-serif;letter-spacing:3px;color:var(--accent);text-transform:uppercase}
+h1{font-size:clamp(42px,7vw,76px);font-weight:normal;line-height:1.05;margin:20px 0}
+h1 em{color:var(--accent)}
+.hero p{font-size:17px;line-height:1.8;color:var(--muted);max-width:450px}
+.search{display:flex;max-width:490px;margin-top:28px;background:var(--paper);border:1px solid var(--line);border-radius:4px;padding:6px}
+.search input{min-width:0;flex:1;border:0;outline:0;background:transparent;padding:12px;color:var(--text)}
+.search button,.primary{background:var(--accent);color:white;border:0;padding:12px 18px;border-radius:3px}
+.hero-art{min-height:280px;display:flex;align-items:center;justify-content:center;position:relative}
+.sun{width:210px;height:210px;border-radius:50%;background:#e7e1d1;display:flex;align-items:center;justify-content:center;font-size:82px;color:#52634b}
+.book{position:absolute;width:95px;height:145px;background:#354735;border:5px double #d8cba8;color:#e8ddbd;display:flex;align-items:center;justify-content:center;text-align:center;padding:8px;box-shadow:9px 12px 20px #0002;transform:rotate(-12deg);font-size:16px}
+.book.two{background:#a46e4e;transform:translate(75px,35px) rotate(12deg)}
+section{padding:38px 6%}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:12px;margin-bottom:22px}
+h2{font-size:30px;font-weight:normal;margin:8px 0}
+.section-head p{color:var(--muted);font:13px Arial,sans-serif}
+.moods{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+.mood{border:1px solid var(--line);background:var(--paper);padding:22px 10px;text-align:center;border-radius:4px;color:var(--text)}
+.mood span{display:block;font-size:25px;margin-bottom:12px}
+.mood b{font-size:14px;font-weight:normal}
+.mood.active{background:var(--accent);color:white}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}
+.chip{border:1px solid var(--line);border-radius:30px;background:transparent;color:var(--text);padding:9px 15px;font:12px Arial,sans-serif}
+.chip.active{background:var(--text);color:var(--bg)}
+.books{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+.book-card{min-width:0}
+.cover{height:205px;padding:17px;display:flex;align-items:center;justify-content:center;text-align:center;color:#f7f0dd;box-shadow:0 5px 12px #0001;position:relative;overflow:hidden}
+.cover:before{content:"";position:absolute;inset:7px;border:1px solid #ffffff60}
+.cover strong{font-size:21px;font-weight:normal;z-index:1}
+.cover small{display:block;font:10px Arial,sans-serif;margin-top:12px;letter-spacing:2px}
+.book-card h3{font-size:17px;font-weight:normal;margin:13px 0 5px}
+.book-card p{font:12px Arial,sans-serif;color:var(--muted);margin:0 0 12px}
+.read-btn{border:1px solid var(--line);background:transparent;color:var(--text);padding:9px 12px;width:100%;font:12px Arial,sans-serif}
+.read-btn:hover{background:var(--accent);color:white}
+.notice{background:var(--paper);border:1px solid var(--line);padding:24px;line-height:1.8;color:var(--muted);font-size:14px}
+footer{padding:35px 6%;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;color:var(--muted);font:12px Arial,sans-serif}
+footer strong{font: bold 18px Georgia,serif;letter-spacing:3px;color:var(--text)}
+dialog{width:min(700px,94%);max-height:85vh;background:var(--paper);color:var(--text);border:1px solid var(--line);padding:25px;border-radius:5px}
+dialog::backdrop{background:#151811b3}
+.reader-tools{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.reader-tools button{padding:8px 12px;border:1px solid var(--line);background:transparent;color:var(--text)}
+#readerText{font-size:18px;line-height:1.9;white-space:pre-line}
+body.sepia{--bg:#efe1c5;--paper:#f8edda;--text:#493927;--muted:#806b53;--line:#dac7a6;--accent:#80613e}
+body.dark{--bg:#191b19;--paper:#232623;--text:#e8e5da;--muted:#a5a79c;--line:#393d38;--accent:#829176}
+@media(max-width:650px){
+ header{padding:17px 5%}nav a{display:none}nav .menu{display:block;background:transparent;border:1px solid var(--line);padding:8px;color:var(--text)}
+ .hero{padding:48px 6% 25px;grid-template-columns:1fr;gap:0}.hero-art{min-height:220px}.sun{width:165px;height:165px}
+ section{padding:30px 5%}.moods{grid-template-columns:repeat(3,minmax(0,1fr))}.books{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 13px}.cover{height:190px}
+ .section-head{align-items:start;flex-direction:column;gap:0}
+}
+</style>
+</head>
+<body>
+<header>
+ <div class="logo">OLIKH<small>EVERY PAGE, A NEW WORLD.</small></div>
+ <nav>
+  <a href="#library">Library</a><a href="#moods">Discover</a><a href="#about">About</a>
+  <button class="menu" onclick="document.getElementById('library').scrollIntoView({behavior:'smooth'})">Explore ↓</button>
+ </nav>
+</header>
+
+<main>
+ <div class="hero">
+  <div>
+   <div class="eyebrow">A quiet corner of the world</div>
+   <h1>Every Page,<br><em>A New World.</em></h1>
+   <p>A thoughtful home for curious minds. Discover stories, explore ideas, and find your next favourite book.</p>
+   <div class="search"><input id="searchInput" placeholder="Search books or authors..." aria-label="Search books"><button onclick="searchBooks()">Search</button></div>
+  </div>
+  <div class="hero-art" aria-label="Illustration of books">
+   <div class="sun">✳</div><div class="book">THE ART<br>OF<br>READING</div><div class="book two">A WORLD<br>OF<br>STORIES</div>
+  </div>
+ </div>
+
+ <section id="moods">
+  <div class="section-head"><div><div class="eyebrow">Find your feeling</div><h2>Read by Mood</h2></div><p>What kind of world today?</p></div>
+  <div class="moods">
+   <button class="mood" onclick="pickMood('Mystery',this)"><span>⌕</span><b>Mystery</b></button>
+   <button class="mood" onclick="pickMood('Adventure',this)"><span>↗</span><b>Adventure</b></button>
+   <button class="mood" onclick="pickMood('Romance',this)"><span>♡</span><b>Romance</b></button>
+   <button class="mood" onclick="pickMood('Inspiration',this)"><span>✳</span><b>Inspiration</b></button>
+   <button class="mood" onclick="pickMood('Thinking',this)"><span>☼</span><b>Deep Thinking</b></button>
+  </div>
+ </section>
+
+ <section id="library">
+  <div class="section-head"><div><div class="eyebrow">The collection</div><h2>Explore the Library</h2></div><p id="resultCount">A small beginning, a world of possibilities.</p></div>
+  <div class="filters">
+   <button class="chip active" onclick="pickCategory('All',this)">All Books</button>
+   <button class="chip" onclick="pickCategory('Bengali',this)">Bengali</button>
+   <button class="chip" onclick="pickCategory('World',this)">World Literature</button>
+   <button class="chip" onclick="pickCategory('Philosophy',this)">Philosophy</button>
+   <button class="chip" onclick="pickCategory('Adventure',this)">Adventure</button>
+  </div>
+  <div class="books" id="bookGrid"></div>
+ </section>
+
+ <section id="journal">
+  <div class="section-head"><div><div class="eyebrow">Your reading life</div><h2>Reading Journal</h2></div></div>
+  <div class="notice">Your reading journey starts with one page. Open a book and select “Save to Journal” to keep it in your reading list on this device.</div>
+  <div id="journalList" style="margin-top:14px"></div>
+ </section>
+
+ <section id="about">
+  <div class="eyebrow">Our little library</div><h2>Stories belong to everyone.</h2>
+  <div class="notice">OLIKH is a reading discovery project made for curious minds. We aim to connect readers with books and authorised reading sources in Bengali and English. We only intend to host books that are in the public domain or that we have permission to publish. Copyrighted books should be read through their authorised sources.</div>
+ </section>
+</main>
+
+<footer><div><strong>OLIKH</strong><p>Every Page, A New World.</p></div><div>Read thoughtfully. Discover endlessly.<br>© 2026 OLIKH · An independent library project</div></footer>
+
+<dialog id="reader">
+ <div class="section-head"><div><div class="eyebrow">Your reading space</div><h2 id="readerTitle">Reading Mode</h2></div><button onclick="closeReader()" class="chip">Close ✕</button></div>
+ <div class="reader-tools">
+  <button onclick="setTheme('light')">Light</button><button onclick="setTheme('sepia')">Sepia</button><button onclick="setTheme('dark')">Dark</button>
+  <button onclick="changeFont(-1)">A−</button><button onclick="changeFont(1)">A+</button>
+  <button onclick="saveJournal()">Save to Journal ♡</button>
+ </div>
+ <p id="readerMeta" style="color:var(--muted);font:12px Arial,sans-serif"></p>
+ <div id="readerText">Choose a book to begin reading.</div>
+ <p style="font:12px Arial,sans-serif;color:var(--muted);margin-top:25px">Note: This demo does not include full book texts. Use the authorised source link where provided.</p>
+ <div id="sourceLink" style="margin-top:15px"></div>
+</dialog>
+
+<script>
+const books=[
+ {title:"Gitanjali",author:"Rabindranath Tagore",cat:"Bengali",mood:"Thinking",color:"#52634b",desc:"Poetry · Bengali literature",text:"A celebrated collection of poems by Rabindranath Tagore. Explore the poems through an authorised edition or public-domain source.",url:"https://bn.wikisource.org/wiki/গীতাঞ্জলি"},
+ {title:"Pather Panchali",author:"Bibhutibhushan Bandyopadhyay",cat:"Bengali",mood:"Adventure",color:"#9a694b",desc:"Novel · Bengali literature",text:"A landmark Bengali novel following the lives, hopes and hardships of a rural family. Find a legally available edition before reading.",url:"https://bn.wikisource.org/"},
+ {title:"The Time Machine",author:"H. G. Wells",cat:"World",mood:"Adventure",color:"#445a70",desc:"Science fiction · Classic",text:"A classic science-fiction novel about a traveller who journeys into the distant future. This preview is not the full book.",url:"https://www.gutenberg.org/ebooks/35"},
+ {title:"Pride and Prejudice",author:"Jane Austen",cat:"World",mood:"Romance",color:"#9b7779",desc:"Novel · Classic",text:"Jane Austen's celebrated novel explores relationships, first impressions and social expectations. This preview is not the full book.",url:"https://www.gutenberg.org/ebooks/1342"},
+ {title:"The Art of War",author:"Sun Tzu",cat:"Philosophy",mood:"Thinking",color:"#6c6652",desc:"Strategy · Philosophy",text:"An influential classic on strategy and decision-making. Choose a trustworthy edition from a legal source.",url:"https://www.gutenberg.org/"},
+ {title:"The Adventures of Sherlock Holmes",author:"Arthur Conan Doyle",cat:"World",mood:"Mystery",color:"#66534a",desc:"Mystery · Detective fiction",text:"Meet Sherlock Holmes in a classic collection of detective stories. This preview is not the full book.",url:"https://www.gutenberg.org/ebooks/1661"},
+ {title:"The Jungle Book",author:"Rudyard Kipling",cat:"World",mood:"Adventure",color:"#4e6c52",desc:"Adventure · Classic",text:"A classic collection of stories associated with Mowgli and the jungle. This preview is not the full book.",url:"https://www.gutenberg.org/ebooks/236"},
+ {title:"Meditations",author:"Marcus Aurelius",cat:"Philosophy",mood:"Inspiration",color:"#8c795b",desc:"Philosophy · Reflection",text:"Reflections on character, duty and how to live well, written by the Roman emperor Marcus Aurelius. This preview is not the full book.",url:"https://www.gutenberg.org/"},
+ {title:"Frankenstein",author:"Mary Shelley",cat:"World",mood:"Mystery",color:"#4d505b",desc:"Gothic · Classic",text:"Mary Shelley's classic novel asks questions about ambition, responsibility and humanity. This preview is not the full book.",url:"https://www.gutenberg.org/ebooks/84"},
+ {title:"Chokher Bali",author:"Rabindranath Tagore",cat:"Bengali",mood:"Romance",color:"#7b554c",desc:"Novel · Bengali literature",text:"A major Bengali novel by Rabindranath Tagore. Look for an authorised or public-domain edition.",url:"https://bn.wikisource.org/"},
+ {title:"Aesop's Fables",author:"Aesop",cat:"World",mood:"Inspiration",color:"#a17a48",desc:"Fables · Short reads",text:"A collection of traditional fables with memorable lessons. Look for a public-domain edition.",url:"https://www.gutenberg.org/"},
+ {title:"The Republic",author:"Plato",cat:"Philosophy",mood:"Thinking",color:"#4b625f",desc:"Philosophy · Ideas",text:"Plato's philosophical dialogue explores justice, society and the ideal state. This preview is not the full book.",url:"https://www.gutenberg.org/"}
+];
+let category="All",mood="",query="",current=null,fontSize=18;
+const grid=document.getElementById("bookGrid");
+function render(){
+ const found=books.filter(b=>(category==="All"||b.cat===category)&&(!mood||b.mood===mood)&&(b.title+" "+b.author+" "+b.cat+" "+b.mood).toLowerCase().includes(query.toLowerCase()));
+ grid.innerHTML="";
+ found.forEach((b,i)=>{
+  const card=document.createElement("article");card.className="book-card";
+  const cover=document.createElement("div");cover.className="cover";cover.style.background=b.color;
+  const title=document.createElement("div");title.innerHTML="<strong></strong><small>OLIKH COLLECTION</small>";title.querySelector("strong").textContent=b.title;cover.appendChild(title);
+  const h=document.createElement("h3");h.textContent=b.title;
+  const p=document.createElement("p");p.textContent=b.author+" · "+b.desc;
+  const btn=document.createElement("button");btn.className="read-btn";btn.textContent="Explore Book ↗";btn.onclick=()=>openBook(b);
+  card.append(cover,h,p,btn);grid.appendChild(card);
+ });
+ document.getElementById("resultCount").textContent=found.length+" books in this collection";
+ if(!found.length)grid.innerHTML="<p>No books found. Try another search.</p>";
+}
+function pickCategory(c,el){category=c;mood="";document.querySelectorAll(".chip").forEach(x=>x.classList.remove("active"));el.classList.add("active");document.querySelectorAll(".mood").forEach(x=>x.classList.remove("active"));render();}
+function pickMood(m,el){mood=m===mood?"":m;document.querySelectorAll(".mood").forEach(x=>x.classList.remove("active"));if(mood)el.classList.add("active");category="All";document.querySelectorAll(".chip").forEach(x=>x.classList.remove("active"));document.querySelectorAll(".chip")[0].classList.add("active");render();document.getElementById("library").scrollIntoView({behavior:"smooth"});}
+function searchBooks(){query=document.getElementById("searchInput").value.trim();render();document.getElementById("library").scrollIntoView({behavior:"smooth"});}
+document.getElementById("searchInput").addEventListener("keydown",e=>{if(e.key==="Enter")searchBooks()});
+function openBook(b){current=b;document.getElementById("readerTitle").textContent=b.title;document.getElementById("readerMeta").textContent=b.author+" · "+b.desc;document.getElementById("readerText").textContent=b.text;document.getElementById("readerText").style.fontSize=fontSize+"px";document.getElementById("sourceLink").innerHTML="";const a=document.createElement("a");a.href=b.url;a.target="_blank";a.rel="noopener";a.textContent="Find an authorised reading source ↗";a.style.color="var(--accent)";document.getElementById("sourceLink").appendChild(a);document.getElementById("reader").showModal();}
+function closeReader(){document.getElementById("reader").close();}
+function setTheme(t){document.body.classList.remove("sepia","dark");if(t!=="light")document.body.classList.add(t);}
+function changeFont(n){fontSize=Math.max(14,Math.min(30,fontSize+n*2));document.getElementById("readerText").style.fontSize=fontSize+"px";}
+function getJournal(){try{return JSON.parse(localStorage.getItem("olikh-journal")||"[]")}catch(e){return []}}
+function saveJournal(){if(!current)return;let j=getJournal();if(!j.some(x=>x.title===current.title)){j.push({title:current.title,author:current.author});localStorage.setItem("olikh-journal",JSON.stringify(j));}renderJournal();alert("Saved to your reading journal on this device.");}
+function renderJournal(){const el=document.getElementById("journalList");el.innerHTML="";const j=getJournal();if(!j.length){el.textContent="No books saved yet.";el.style.color="var(--muted)";return;}j.forEach(b=>{const p=document.createElement("p");p.textContent="♡ "+b.title+" — "+b.author;el.appendChild(p);});}
+render();renderJournal();
+</script>
+</body>
+</html>
